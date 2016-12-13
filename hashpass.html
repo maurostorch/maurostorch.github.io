@@ -85,7 +85,7 @@
 			};
 		</script>
 		<script type="text/javascript">
-			new Clipboard('.btn');
+			//new Clipboard('.btn');
 			function gen() {
 				var i = document.getElementById('id').value;
 				var p = document.getElementById('pw').value;
@@ -95,30 +95,58 @@
 				pw = pw.substring(0,15);
 				var output = document.getElementById('output');
 				out.innerHTML=pw;
-				var range = document.createRange();  
+				var range = document.createRange();
 				range.selectNode(out);
 				window.getSelection().addRange(range);
 				document.execCommand('copy');
 				output.innerHTML = pw.substring(0,3)+"........."+pw.substring(12);
-				window.getSelection().removeAllRanges(); 
-	
+				window.getSelection().removeAllRanges();
+
 			}
 			function closewin() {
 				window.top.close();
 			}
+			function clearall() {
+				document.querySelector('#id').value='';
+				document.querySelector('#pw').value='';
+				document.querySelector('#salt').value='';
+			}
 		</script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body>
-		id:<input id="id" type="text"><br>
-		pw:<input id="pw" type="password"><br>
-		salt:<input id="salt" type="text"><br>
-		<button id="gen" onclick="gen();">gen</button><button id="close" onclick="closewin();">close</button><br>
-		<div id="result">
-			<h2 id="output"></h2>
-			<p id="out" style="color:white;"></p>
+		<div class="container container-fluid">
+			<div class="jumbotron">
+				<h1>pHasHsword generator</h1>
+				<p>
+					Feel free for creating your passwords. We do not store any information, you just create your own
+					rules for creating your password, i.e. website name and a master password (with or without a salt).
+				</p>
+				<p>
+					The schema is concatenating id+password+salt e calculating a sha-512 hash. First 15 characters are copied into your Clipboard. No body see it!
+				</p>
+			</div>
+			<div class="container col-md-6 col-md-offset-3">
+				<div class="form-group">
+					<label for="id">Id</label><input id="id" type="text" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="pw">Password</label><input id="pw" type="password" class="form-control">
+				</div>
+				<div class="from-group">
+					<label for="salt">Salt</label><input id="salt" type="text" class="form-control">
+				</div>
+				<button class="btn btn-default btn-lg active" id="gen" onclick="gen();">gen</button>
+				<button class="btn btn-default btn-lg" id="close" onclick="clearall();">clear</button><br>
+				<div id="result">
+					<h2 id="output"></h2>
+					<p id="out" style="color:white;"></p>
+				</div>
+			</div>
 		</div>
-			<script>window.moveTo(580,240);window.resizeTo(180,160);</script>
-			<script>document.querySelector('#id').focus();</script>
-	
-	
+		<script>window.moveTo(580,240);window.resizeTo(180,160);</script>
+		<script>document.querySelector('#id').focus();</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body></html>
